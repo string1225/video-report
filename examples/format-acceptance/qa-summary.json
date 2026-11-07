@@ -1,0 +1,125 @@
+{
+  "research_checked_on": "2026-11-07",
+  "title": "PPT、文档、介绍视频：人们更容易接受哪一种？",
+  "scene_count": 11,
+  "media": {
+    "passed": true,
+    "errors": [],
+    "full_decode": true,
+    "video": {
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "pixel_format": "yuv420p",
+      "fps": 30.0,
+      "frames": 8444,
+      "duration_seconds": 281.466667
+    },
+    "audio": {
+      "codec": "aac",
+      "sample_rate": 48000,
+      "channels": 1,
+      "duration_seconds": 281.452,
+      "non_silent": true,
+      "mean_volume_db": -19.6,
+      "peak_volume_db": -1.6
+    },
+    "manual_listening": "not_performed",
+    "manual_visual_review": "not_performed",
+    "captions": {
+      "count": 82,
+      "timing_types": [
+        "word"
+      ]
+    },
+    "presentation": {
+      "browser": "Playwright Chromium",
+      "browser_plugin": "Browser plugin not available",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "scene_count": 11,
+      "page_errors": [],
+      "overflow": false,
+      "navigation": "passed",
+      "play_pause": "passed",
+      "pause_confirmed": true,
+      "seek": {
+        "target_ms": 225161.6,
+        "audio_ms": 225161.6,
+        "actual_scene": 8,
+        "expected_scene": 8
+      }
+    }
+  },
+  "assistant_visual_review": {
+    "reviewer": "assistant",
+    "contact_sheet": "contact-sheet.png",
+    "video_frames": [
+      "quality/intro-caption.png",
+      "quality/evidence-final.png",
+      "quality/closing-caption.png"
+    ],
+    "observations": [
+      "All eleven slides inspected through the contact sheet.",
+      "Chinese glyphs, source notes and subtitle safe area visible.",
+      "Chart values were widened to remain on one line; final encoded frame inspected."
+    ],
+    "full_manual_listening": "not_performed"
+  },
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
+    "run": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "skill_validation": "skill-creator quick_validate.py passed",
+  "installed_skill": "~/.codex/skills/video-report (directory junction to repository skill source)",
+  "audio_cache": {
+    "units": 11,
+    "all_reused_on_repeat_build": true
+  },
+  "chinese_and_space_path_smoke": {
+    "passed": true,
+    "video": {
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "pixel_format": "yuv420p",
+      "fps": 30.0,
+      "frames": 1281,
+      "duration_seconds": 42.7
+    },
+    "path": "output/验证 中文路径/短样片"
+  },
+  "runtime": {
+    "python": "3.14.3",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "edge-tts": "7.3.1",
+    "playwright": "1.64.1",
+    "pillow": "13.0.0",
+    "imageio-ffmpeg": "0.8.1",
+    "tools": {
+      "ffmpeg": "ffmpeg.exe",
+      "ffprobe": "ffprobe.exe"
+    },
+    "ffmpeg_version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe_version": "ffprobe version 2023-02-13-git-2296078397-essentials_build-www.gyan.dev Copyright (c) 2007-2023 the FFmpeg developers",
+    "libx264": true,
+    "aac": true,
+    "subtitles/libass": true,
+    "loudnorm": true,
+    "chromium": "156.0.8078.4",
+    "font": "Microsoft YaHei",
+    "chinese_font_layout": {
+      "x": 8,
+      "y": 8,
+      "width": 624,
+      "height": 42
+    }
+  },
+  "video_sha256": "9551e2d4f081aa5eab46b984fd06b5feff3762a18c52e6e7c83954b43e6f0eb4",
+  "delivery": "Generated media are local under output/format-acceptance and excluded from Git; report, research, scripts, and QA are versioned."
+}

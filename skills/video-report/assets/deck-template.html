@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Video report</title><link rel="stylesheet" href="theme.css"></head>
+<body><div id="stage"><header class="topbar"><div class="brand"><span class="dot"></span><span id="brand"></span></div><div class="edition" id="edition"></div></header><main class="main" id="content"></main><footer class="source"><span class="source-text" id="source"></span><span class="page-no" id="page-number"></span></footer><div id="caption" class="caption"></div></div><div id="controls"><button id="previous">上一页</button><button id="play">播放</button><button id="next">下一页</button><input id="seek" type="range" min="0" max="1000" value="0" aria-label="播放进度"><span id="clock">00:00 / 00:00</span></div><audio id="audio" src="../voice.wav" preload="metadata"></audio>
+<script>
+const report=__REPORT__,timeline=__TIMELINE__,captions=__CAPTIONS__;
+const exportMode=new URLSearchParams(location.search).has('export');
+if(exportMode)document.body.classList.add('export');
+document.title=report.title;
+const W=1920,H=1080;
+const stage=document.querySelector('#stage'),content=document.querySelector('#content'),audio=document.querySelector('#audio');
+stage.style.width=W+'px';stage.style.height=H+'px';
+document.querySelector('#brand').textContent=report.brand||'FORMAT / RESEARCH NOTES';
+document.querySelector('#edition').textContent=report.edition||'EVIDENCE & DESIGN · 2026';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const lines=x=>esc(x).replace(/\n/g,'<br>');
+const icon=(name)=>{const b='fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';return `<svg class="format-icon" viewBox="0 0 80 70" ${b}>${name==='play'?'<rect x="7" y="9" width="66" height="49" rx="7"/><path d="M34 23l19 11-19 12z"/>':name==='doc'?'<path d="M22 5h27l14 14v45H22z"/><path d="M49 5v15h14M32 31h21M32 42h21M32 53h14"/>':'<rect x="7" y="8" width="66" height="43" rx="4"/><path d="M40 51v13M25 64h30M19 37l13-12 11 8 17-15"/>'}</svg>`};
+const kicker=s=>`<div class="kicker">${esc(s.kicker||'研究观察')}</div>`;
+const heading=s=>kicker(s)+`<h1 class="slide-title fit-check">${lines(s.title)}</h1>`+(s.subtitle?`<p class="subtitle fit-check">${lines(s.subtitle)}</p>`:'');
+const cards=(items,cls='')=>`<div class="grid cols-${Math.min(items.length,4)} ${cls}">${items.map((c,i)=>`<article class="card ${c.highlight?'highlight':''} fit-check"><div class="card-index">${esc(c.label||String(i+1).padStart(2,'0'))}</div><h3>${lines(c.title)}</h3>${c.value?`<div class="value">${esc(c.value)}</div>`:''}<p>${lines(c.text||'')}</p></article>`).join('')}</div>`;
+window.currentScene=-1;
+window.showScene=function(i){i=Math.max(0,Math.min(report.scenes.length-1,i));window.currentScene=i;const s=report.scenes[i];let html='';
+if(s.kind==='title')html=`<section class="hero"><div>${kicker(s)}<h1 class="slide-title fit-check">${lines(s.title)}</h1><p class="subtitle fit-check">${lines(s.subtitle||'')}</p><div class="hero-tags">${(s.tags||['PPT','文档','介绍视频']).map(t=>`<span class="pill">${esc(t)}</span>`).join('')}</div></div><div class="formats fit-check">${(s.formats||[{title:'PPT',text:'引导注意与同步讨论',icon:'slide'},{title:'文档',text:'自主阅读与反复查阅',icon:'doc'},{title:'介绍视频',text:'过程演示与视听解释',icon:'play'}]).map(f=>`<div class="format">${icon(f.icon)}<div><div class="format-name">${esc(f.title)}</div><div class="format-desc">${esc(f.text)}</div></div></div>`).join('')}</div></section>`;
+else if(s.kind==='evidence')html=heading(s)+(s.big_number?`<div class="big-callout fit-check"><div class="big-number">${esc(s.big_number)}</div><div class="big-number-label">${lines(s.number_label||'')}<br><span class="stat-note">${esc(s.number_note||'')}</span></div></div>`:'')+`<div class="bars fit-check">${(s.bars||[]).map(b=>`<div class="bar-row"><div class="bar-label">${lines(b.label)}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(0,Math.min(100,Number(b.value)/(s.bar_max||1)*100))}%"></div></div><div class="bar-value">${esc(b.display||b.value)}</div></div>`).join('')}</div>`+(s.note?`<p class="note fit-check">${lines(s.note)}</p>`:'');
+else if(s.kind==='decision')html=heading(s)+`<div class="decision fit-check">${(s.rows||[]).map((r,j)=>`<div class="decision-row"><div class="decision-index">0${j+1}</div><div class="decision-goal">${esc(r.goal)}</div><div class="decision-format">${esc(r.format)}</div></div>`).join('')}</div>`+(s.note?`<p class="note fit-check">${lines(s.note)}</p>`:'');
+else if(s.kind==='flow')html=heading(s)+`<div class="flow">${(s.steps||[]).map((r,j)=>`<article class="card fit-check"><div class="step">0${j+1}</div><h3>${esc(r.title)}</h3><p>${lines(r.text)}</p></article>`).join('')}</div>`+(s.note?`<p class="note fit-check">${lines(s.note)}</p>`:'');
+else if(s.kind==='closing')html=`<section class="closing">${heading(s)}${s.quote?`<div class="quote-block fit-check">${lines(s.quote)}</div>`:''}<div class="footline fit-check">${esc(s.footline||'')}</div></section>`;
+else html=heading(s)+(s.columns?cards(s.columns):'')+(s.quote?`<div class="quote-block fit-check">${lines(s.quote)}</div>`:'')+(s.bullets?`<ul class="bullets fit-check">${s.bullets.map(t=>`<li>${lines(t)}</li>`).join('')}</ul>`:'')+(s.note?`<p class="note fit-check">${lines(s.note)}</p>`:'');
+content.innerHTML=html;document.querySelector('#source').textContent=s.footer||((s.source_ids||[]).length?'来源：'+s.source_ids.map(id=>(report.sources||[]).find(r=>r.id===id)?.short||id).join('；'):'');document.querySelector('#page-number').textContent=String(i+1).padStart(2,'0')+' / '+String(report.scenes.length).padStart(2,'0');};
+window.renderAt=function(ms){if(timeline.length){let i=timeline.findIndex(s=>ms>=s.start_ms&&ms<s.end_ms);if(i<0)i=ms>=timeline.at(-1).end_ms?timeline.length-1:0;if(window.currentScene!==i)window.showScene(i);}const cue=captions.find(c=>ms>=c.start_ms&&ms<c.end_ms);const el=document.querySelector('#caption');el.textContent=cue?.text||'';el.style.display=cue?'block':'none';};
+window.layoutIssues=function(){
+  const bounds=stage.getBoundingClientRect(),scale=bounds.width/W,issues=[];
+  const outside=(r,bottom)=>r.bottom>bounds.top+bottom*scale+1||r.right>bounds.right-55*scale+1||r.left<bounds.left+55*scale-1;
+  for(const element of document.querySelectorAll('.fit-check')){
+    const r=element.getBoundingClientRect();
+    if(outside(r,830))issues.push({type:'container',text:element.textContent.slice(0,80),bounds:[r.x,r.y,r.width,r.height]});
+  }
+  for(const element of document.querySelectorAll('.bar-value,.bar-label,.source-text,.card,h1,h3,p,.decision-goal,.decision-format,.format-name,.format-desc')){
+    if(element.scrollWidth>element.clientWidth+1)issues.push({type:'text-width',text:element.textContent.slice(0,80)});
+  }
+  const walker=document.createTreeWalker(stage,NodeFilter.SHOW_TEXT);
+  while(walker.nextNode()){
+    const node=walker.currentNode,parent=node.parentElement;
+    if(!node.textContent.trim()||parent.closest('.caption,svg'))continue;
+    const bottom=parent.closest('.source')?918:parent.closest('.topbar')?115:830;
+    const range=document.createRange();range.selectNodeContents(node);
+    for(const r of range.getClientRects()){
+      if(r.height&&r.width&&outside(r,bottom)){issues.push({type:'text-bounds',text:node.textContent.slice(0,80),bounds:[r.x,r.y,r.width,r.height]});break;}
+    }
+  }
+  return issues;
+};
+function fit(){const available=innerHeight-(exportMode?0:76),scale=Math.min(innerWidth/W,available/H);stage.style.transform=`scale(${scale})`;stage.style.left=(innerWidth-W*scale)/2+'px';stage.style.top=(available-H*scale)/2+'px';}addEventListener('resize',fit);fit();
+const duration=()=>timeline.length?timeline.at(-1).end_ms/1000:(Number.isFinite(audio.duration)?audio.duration:0);const time=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+function update(){if(exportMode)return;window.renderAt(audio.currentTime*1000);document.querySelector('#seek').value=duration()?audio.currentTime/duration()*1000:0;document.querySelector('#clock').textContent=time(audio.currentTime)+' / '+time(duration());if(!audio.paused)requestAnimationFrame(update);}audio.addEventListener('timeupdate',update);audio.addEventListener('loadedmetadata',update);audio.addEventListener('ended',()=>document.querySelector('#play').textContent='播放');
+document.querySelector('#play').onclick=async()=>{if(audio.paused){await audio.play();document.querySelector('#play').textContent='暂停';update();}else{audio.pause();document.querySelector('#play').textContent='播放';}};
+function navigate(d){let i=Math.max(0,Math.min(report.scenes.length-1,window.currentScene+d));if(timeline[i])audio.currentTime=timeline[i].start_ms/1000;window.showScene(i);}
+document.querySelector('#previous').onclick=()=>navigate(-1);document.querySelector('#next').onclick=()=>navigate(1);document.querySelector('#seek').oninput=e=>{audio.currentTime=e.target.value/1000*duration();window.renderAt(audio.currentTime*1000);};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')navigate(1);if(e.key==='ArrowLeft')navigate(-1);if(e.code==='Space'){e.preventDefault();document.querySelector('#play').click();}});window.showScene(0);
+</script></body></html>

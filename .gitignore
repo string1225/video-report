@@ -1,0 +1,7 @@
+.venv/
+.tools/
+output/
+__pycache__/
+*.pyc
+.pytest_cache/
+.worktrees/

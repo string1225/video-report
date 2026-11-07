@@ -1,0 +1,579 @@
+{
+  "title": "PPT、文档、介绍视频：人们更容易接受哪一种？",
+  "brand": "FORMAT / RESEARCH NOTES",
+  "edition": "信息载体研究简报 · 2026.11",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "font": "Microsoft YaHei",
+  "font_size": 46,
+  "max_caption_chars": 22,
+  "voice": {
+    "name": "zh-CN-XiaoxiaoNeural",
+    "rate": "+5%"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "role": "core",
+      "authors": [
+        "Michael Noetel",
+        "Shantell Griffith",
+        "Oscar Delaney",
+        "Taren Sanders",
+        "Philip Parker",
+        "Borja del Pozo Cruz",
+        "Chris Lonsdale"
+      ],
+      "year": 2021,
+      "title": "Video Improves Learning in Higher Education: A Systematic Review",
+      "publication": "Review of Educational Research 91(2), 204–236",
+      "doi": "10.3102/0034654321990713",
+      "original_url": "https://doi.org/10.3102/0034654321990713",
+      "verified_via": [
+        "https://api.crossref.org/works/10.3102/0034654321990713"
+      ],
+      "verification_status": "publisher_deposited_original_abstract_verified_full_text_not_read",
+      "design": "高等教育随机试验系统综述与多层随机效应元分析",
+      "sample": {
+        "included_studies": 105,
+        "pooled_students": 7776,
+        "context": "高等教育学生；不是一般消费者或商用介绍视频观众"
+      },
+      "outcomes": [
+        "学习结果的标准化效应量"
+      ],
+      "results": {
+        "video_replaces_existing_teaching_g": 0.28,
+        "video_added_to_existing_teaching_g": 0.8
+      },
+      "limitations": [
+        "替换与补充是两种不同的比较",
+        "对照为多种既有教学方式，不能一概称为文本/PPT",
+        "额外视频可能增加教学资源或暴露量，不能隔离形式本身的贡献",
+        "作者摘要提示实验与发表偏倚",
+        "未从全文核实置信区间、子组和每组研究数量"
+      ],
+      "safe_video_summary_zh": "高等教育的研究汇总表明，视频往往能帮助学习；作为原有教学的补充时，收益更明显。但不能据此为PPT、文档和视频做普遍排名。",
+      "avoid_claims": [
+        "视频比文字好28%或80%",
+        "所有人都更接受视频",
+        "105项商业介绍视频测试"
+      ],
+      "url": "https://doi.org/10.3102/0034654321990713",
+      "short": "Noetel 等，2021｜高等教育系统综述",
+      "checked_on": "2026-11-07"
+    },
+    {
+      "id": "S2",
+      "role": "core",
+      "authors": [
+        "Philip J. Guo",
+        "Juho Kim",
+        "Rob Rubin"
+      ],
+      "year": 2014,
+      "title": "How Video Production Affects Student Engagement: An Empirical Study of MOOC Videos",
+      "publication": "Proceedings of the First ACM Conference on Learning @ Scale",
+      "doi": "10.1145/2556325.2566239",
+      "original_url": "https://doi.org/10.1145/2556325.2566239",
+      "author_copy_url": "https://pg.ucsd.edu/publications/edX-MOOC-video-production-and-engagement_LAS-2014.pdf",
+      "verified_via": [
+        "https://api.crossref.org/works/10.1145/2556325.2566239",
+        "https://pg.ucsd.edu/publications/edX-MOOC-video-production-and-engagement_LAS-2014.pdf"
+      ],
+      "verification_status": "original_pdf_first_page_abstract_and_introduction_verified_full_text_not_read",
+      "access_notes": "完整1.68MB文件多次限时读取失败；通过HTTP范围请求读取前100KB并解压PDF文本流，核对首页。未完整核读六分钟分析，成片不引用该阈值。",
+      "design": "edX既有MOOC观看日志的观察研究，并结合制作人员访谈",
+      "sample": {
+        "watching_sessions": 6900000,
+        "courses": 4,
+        "context": "观看会话数不是独立人数"
+      },
+      "outcomes": [
+        "视频观看时长",
+        "是否尝试作答视频之后的测验题"
+      ],
+      "results": [
+        "原始摘要报告较短视频有较高观看参与",
+        "不同制作方式存在观看参与差异",
+        "论文首页明确把参与视为学习的必要但非充分前提"
+      ],
+      "limitations": [
+        "观察性比较，不能排除内容、难度与制作差异",
+        "尝试作答不是答对",
+        "观看参与不是理解或延迟记忆",
+        "未全文核实精确时长分段与六分钟统计",
+        "不宜推广为所有介绍视频的最佳长度"
+      ],
+      "safe_video_summary_zh": "在线课程的观看日志提示，长度和制作方式会影响观众愿意看多久；观看参与和真正学会需要分开衡量。",
+      "avoid_claims": [
+        "690万名学生",
+        "六分钟是任何视频的最佳时长",
+        "短视频让人学得更多的随机试验证据",
+        "答题尝试率等于理解率"
+      ],
+      "url": "https://doi.org/10.1145/2556325.2566239",
+      "short": "Guo、Kim、Rubin，2014｜MOOC观察研究",
+      "checked_on": "2026-11-07"
+    },
+    {
+      "id": "S3",
+      "role": "core",
+      "authors": [
+        "Richard E. Mayer",
+        "Roxana Moreno"
+      ],
+      "year": 2003,
+      "title": "Nine Ways to Reduce Cognitive Load in Multimedia Learning",
+      "publication": "Educational Psychologist 38(1), 43–52",
+      "doi": "10.1207/S15326985EP3801_6",
+      "original_url": "https://doi.org/10.1207/S15326985EP3801_6",
+      "university_copy_url": "https://www.psychology.mcmaster.ca/bennett/psy720/readings/m1/m1r4.pdf",
+      "verification_status": "full_text_verified_university_copy",
+      "design": "认知负荷理论与实验研究总结，不是三载体元分析",
+      "sample": {
+        "pooled_n": null,
+        "context": "多个系统解释实验；没有用于三载体比较的统一总样本"
+      },
+      "outcomes": [
+        "解决新问题的迁移表现；文中明确所报告结果基于迁移测验"
+      ],
+      "results": [
+        "认知加工容量有限",
+        "根据具体过载情境，分段、预训练、去除无关信息、信号提示和图文靠近可以帮助学习",
+        "多媒体定义包括静态图文和动态画面"
+      ],
+      "limitations": [
+        "原则依赖内容、学习者和过载情境",
+        "不是偏好或满意度研究",
+        "不能由双通道推断更多感官刺激总是更好",
+        "不能据此禁止无障碍字幕"
+      ],
+      "safe_video_summary_zh": "影响理解的不只是载体，还包括是否分段、关键关系是否清楚，以及无关内容是否占用注意。",
+      "avoid_claims": [
+        "视频天然比静态图文更容易理解",
+        "三种载体的统一排名",
+        "听觉加视觉必然翻倍记忆"
+      ],
+      "url": "https://doi.org/10.1207/S15326985EP3801_6",
+      "short": "Mayer & Moreno，2003｜认知负荷研究总结",
+      "checked_on": "2026-11-07"
+    },
+    {
+      "id": "S4",
+      "role": "core",
+      "authors": [
+        "Joanna K. Garner",
+        "Michael P. Alley"
+      ],
+      "year": 2013,
+      "title": "How the Design of Presentation Slides Affects Audience Comprehension: A Case for the Assertion–Evidence Approach",
+      "publication": "International Journal of Engineering Education 29(6), 1564–1579",
+      "doi": null,
+      "original_url": "https://writing.engr.psu.edu/ae_comprehension.pdf",
+      "verification_status": "original_author_pdf_first_two_pages_abstract_and_introduction_verified_full_text_not_read",
+      "access_notes": "完整约3MB文件限时下载不全；成功范围读取前100KB，核对原始首页书目、摘要和引言。检索索引曾误关联2024年讨论材料，最终以原始PDF为准。未可靠建立DOI。",
+      "design": "技术演示的幻灯片设计方案对照：assertion-evidence与常规PowerPoint默认式设计",
+      "sample": {
+        "students": 110,
+        "context": "工程学生观看技术演示",
+        "group_sizes": null
+      },
+      "outcomes": [
+        "论述题理解表现",
+        "误解",
+        "延迟测验回忆",
+        "自报认知负荷"
+      ],
+      "results": [
+        "原始摘要报告assertion-evidence组理解较好、误解较少、延迟回忆较强、自报负荷较低"
+      ],
+      "limitations": [
+        "比较设计方案组合，不能把收益归因于单一设计元素",
+        "不是PPT与视频的对比",
+        "本轮未核实精确效应量、检验统计、组人数或延迟间隔",
+        "工程教育情境不能直接推广至所有介绍材料"
+      ],
+      "safe_video_summary_zh": "幻灯片也能讲清复杂内容；一项工程教育研究发现，清楚的结论句配合视觉证据，理解表现优于常规默认式幻灯片。",
+      "avoid_claims": [
+        "PPT普遍比视频更好",
+        "某一排版元素单独导致全部收益",
+        "未核实的百分比提升或延迟天数"
+      ],
+      "url": "https://writing.engr.psu.edu/ae_comprehension.pdf",
+      "short": "Garner & Alley，2013｜幻灯片设计对照",
+      "checked_on": "2026-11-07"
+    },
+    {
+      "id": "S5",
+      "role": "core",
+      "authors": [
+        "Francis Donkor"
+      ],
+      "year": 2010,
+      "title": "The Comparative Instructional Effectiveness of Print-Based and Video-Based Instructional Materials for Teaching Practical Skills at a Distance",
+      "publication": "The International Review of Research in Open and Distance Learning 11(1)",
+      "doi": "10.19173/irrodl.v11i1.792",
+      "original_url": "https://doi.org/10.19173/irrodl.v11i1.792",
+      "full_text_url": "https://www.irrodl.org/index.php/irrodl/article/download/792/1486?inline=1",
+      "verification_status": "full_text_verified_publisher_open_access",
+      "design": "三个目的性选取中心内随机分配视频/印刷实操教材；理论部分两组都用印刷教材",
+      "sample": {
+        "selected_learners": 73,
+        "analyzed_total": 69,
+        "print_group": 34,
+        "video_group": 35,
+        "context": "加纳男性砌筑与混凝土远程职业课程学习者"
+      },
+      "outcomes": [
+        "20道选择题理论测验",
+        "研究者设计的实操测验",
+        "工艺表现"
+      ],
+      "results": [
+        "视频组实操与工艺表现较好，论文报告p<0.05",
+        "理论知识测验未发现显著组间差异"
+      ],
+      "limitations": [
+        "小样本和窄职业/性别/地区情境",
+        "两组理论教学都使用印刷材料",
+        "实操评分含人为判断",
+        "未显著不证明严格等效",
+        "不测量一般消费者接受度或商业转化"
+      ],
+      "safe_video_summary_zh": "需要看清动作步骤的实操课程可以从视频示范中受益；同一研究未发现理论测验的显著优势，两组理论部分都读了教材。",
+      "avoid_claims": [
+        "视频在所有知识学习上胜过文字",
+        "随机抽取了全球学习者",
+        "理论知识已严格证明等效"
+      ],
+      "url": "https://doi.org/10.19173/irrodl.v11i1.792",
+      "short": "Donkor，2010｜实操课程随机分组",
+      "checked_on": "2026-11-07"
+    },
+    {
+      "id": "S6",
+      "role": "supporting_acceptance_measurement",
+      "authors": [
+        "Francis Donkor"
+      ],
+      "year": 2011,
+      "title": "Assessment of Learner Acceptance and Satisfaction with Video-Based Instructional Materials for Teaching Practical Skills at a Distance",
+      "publication": "The International Review of Research in Open and Distance Learning 12(5)",
+      "doi": "10.19173/irrodl.v12i5.953",
+      "original_url": "https://doi.org/10.19173/irrodl.v12i5.953",
+      "full_text_url": "https://www.irrodl.org/index.php/irrodl/article/download/953/1859?inline=1",
+      "verification_status": "full_text_verified_publisher_open_access",
+      "design": "横断面自填问卷；与S5属于同一较大探索研究，不能当作独立重复验证",
+      "sample": {
+        "selected_learners": 73,
+        "respondents": 71,
+        "centres": 3,
+        "context": "加纳男性砌筑与混凝土远程职业课程学习者"
+      },
+      "outcomes": [
+        "17项四点量表：10项接受度和7项满意度",
+        "有用性、易用性、意图和使用均为自报"
+      ],
+      "results": {
+        "acceptance_item_mean": 3.425,
+        "acceptance_sd": 0.546,
+        "satisfaction_item_mean": 3.465,
+        "satisfaction_sd": 0.538,
+        "scale_min": 1,
+        "scale_max": 4
+      },
+      "limitations": [
+        "没有文本或PPT偏好对照",
+        "自报量表不等于客观学习效果或行为遥测",
+        "与S5样本来源关联",
+        "Likert均值不能转换成偏好人数百分比"
+      ],
+      "safe_video_summary_zh": "这项实操课程调查中的学习者积极评价视频教材；满意度不能替代测验，也不能给所有载体排名。",
+      "avoid_claims": [
+        "86.6%的人更喜欢视频",
+        "满意等于学会",
+        "与S5是两次独立验证"
+      ],
+      "url": "https://doi.org/10.19173/irrodl.v12i5.953",
+      "short": "Donkor，2011｜接受度与满意度调查",
+      "checked_on": "2026-11-07"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "opening",
+      "kind": "title",
+      "kicker": "一份关于信息载体的研究简报",
+      "title": "PPT、文档、视频\n谁更容易被接受？",
+      "subtitle": "愿意看、看得懂、记得住，\n是三个不同的问题。",
+      "tags": [
+        "接受度",
+        "理解与记忆",
+        "使用场景"
+      ],
+      "footer": "定向文献核对｜教育与培训证据为主｜核对日期：2026.11.07",
+      "narration": "做介绍，到底应该用幻灯片、文档，还是视频？先给结论：没有一种载体能对所有人、所有任务稳赢。关键是区分愿不愿意看、能不能看懂，以及之后能不能用。这份简报结合教育与培训研究，梳理证据，再给出制作建议。"
+    },
+    {
+      "id": "define-acceptance",
+      "kind": "cards",
+      "kicker": "01 / 先定义问题",
+      "title": "“接受程度”不是一个单一分数",
+      "subtitle": "喜欢、参与、理解和记忆，需要分别测量。",
+      "columns": [
+        {
+          "label": "PREFERENCE",
+          "title": "愿意看",
+          "text": "偏好、满意度、\n是否愿意打开。"
+        },
+        {
+          "label": "ENGAGEMENT",
+          "title": "继续看",
+          "text": "观看时长、完成度、\n是否继续探索。"
+        },
+        {
+          "label": "COMPREHENSION",
+          "title": "看得懂",
+          "text": "能否回答问题，\n解释关键关系。"
+        },
+        {
+          "label": "APPLICATION",
+          "title": "记得住、用得上",
+          "text": "延迟回忆、迁移，\n实际操作表现。",
+          "highlight": true
+        }
+      ],
+      "source_ids": [
+        "S1",
+        "S2",
+        "S6"
+      ],
+      "footer": "研究中的指标不同，不能把观看时长直接当成理解率。",
+      "narration": "先把接受程度拆开。有人喜欢轻松的视频，却未必记得更牢；有人觉得文档费力，却能靠检索把任务做完。研究中的偏好、观看时长、理解测验和实操表现，测的是不同结果。如果把它们合成一个总分，就容易得出误导性的排名。"
+    },
+    {
+      "id": "acceptance-survey",
+      "kind": "evidence",
+      "kicker": "02 / 主观接受度",
+      "title": "积极评价视频，不等于视频击败其他载体",
+      "subtitle": "一项实操课程调查：学习者对视频教材评价积极。",
+      "big_number": "71",
+      "number_label": "名学习者回答问卷",
+      "number_note": "加纳远程职业课程；四点量表",
+      "bars": [
+        {
+          "label": "接受度均值",
+          "value": 3.425,
+          "display": "3.43 / 4"
+        },
+        {
+          "label": "满意度均值",
+          "value": 3.465,
+          "display": "3.47 / 4"
+        }
+      ],
+      "bar_max": 4,
+      "note": "没有文档或PPT偏好对照；量表均值不能转成人群百分比。",
+      "source_ids": [
+        "S6"
+      ],
+      "footer": "Donkor，2011｜横断面自报问卷；与2010年实操研究属于关联报告。",
+      "narration": "关于愿不愿接受，确实有积极评价视频的研究。例如一项远程实操课程调查，七十一名学习者在四点量表上，给视频教材的接受度均值约三点四三，满意度约三点四七。但这项调查没有文档和幻灯片的偏好对照。这些分数也不能改写成百分之八十几的人更喜欢视频。"
+    },
+    {
+      "id": "learning-review",
+      "kind": "evidence",
+      "kicker": "03 / 客观学习效果",
+      "title": "视频能帮助学习，比较方式很重要",
+      "subtitle": "高等教育随机试验综述：105项研究，7,776名学生。",
+      "big_number": "105",
+      "number_label": "项随机试验纳入综述",
+      "number_note": "学习结果；不是偏好或商业转化",
+      "bars": [
+        {
+          "label": "替代原有教学",
+          "value": 0.28,
+          "display": "g = 0.28"
+        },
+        {
+          "label": "补充原有教学",
+          "value": 0.8,
+          "display": "g = 0.80"
+        }
+      ],
+      "bar_max": 1,
+      "note": "g 是标准化效应量，不是“提升28% / 80%”；两类比较不同。",
+      "source_ids": [
+        "S1"
+      ],
+      "footer": "Noetel 等，2021｜对照涵盖多种既有教学方式；本轮核对原始摘要。",
+      "narration": "再看学习效果。一项二零二一年的系统综述，汇总了一百零五项随机试验，涉及七千七百七十六名高等教育学生。视频替代原有教学时，标准化效应量为零点二八；作为额外补充时，为零点八零。两种比较不同，也可能涉及学习资源和时间的增加。效应量不是百分比，更不能证明视频比文档好百分之八十。"
+    },
+    {
+      "id": "slides-design",
+      "kind": "cards",
+      "kicker": "04 / 幻灯片也有好坏之分",
+      "title": "设计方式，会改变同一种载体的表现",
+      "subtitle": "110名工程学生的技术演示研究，对比两套幻灯片设计。",
+      "columns": [
+        {
+          "label": "常规默认式",
+          "title": "标题 + 多层项目符号",
+          "text": "信息往往围绕主题堆放，\n听众需要自行拼出关系。"
+        },
+        {
+          "label": "ASSERTION — EVIDENCE",
+          "title": "结论句 + 视觉证据",
+          "text": "原始摘要报告：理解更好、\n误解更少、延迟回忆更强。",
+          "highlight": true
+        }
+      ],
+      "note": "比较的是设计方案组合；不是PPT与视频的胜负。",
+      "source_ids": [
+        "S4"
+      ],
+      "footer": "Garner & Alley，2013｜Penn State作者论文；本轮核对摘要及引言。",
+      "narration": "幻灯片也不是一个固定质量的东西。一项涉及一百一十名工程学生的研究发现，用完整结论句配合视觉证据的幻灯片，比常规默认式设计带来更好的理解、较少误解，以及更强的延迟回忆。比较的是两套设计方案，不能把结果说成幻灯片胜过视频。它提醒我们：文件后缀并不能决定沟通质量。"
+    },
+    {
+      "id": "practical-vs-theory",
+      "kind": "cards",
+      "kicker": "05 / 任务会改变结果",
+      "title": "需要看清动作步骤时，视频有针对性价值",
+      "subtitle": "一项69人实操课程研究：视频与印刷实操教材的随机分组比较。",
+      "columns": [
+        {
+          "label": "实操与工艺表现",
+          "title": "视频组表现更好",
+          "text": "动作、步骤与操作示范，\n可以直接呈现。",
+          "highlight": true
+        },
+        {
+          "label": "理论知识测验",
+          "title": "未检出显著组间差异",
+          "text": "两组理论部分，\n本来都使用印刷教材。"
+        }
+      ],
+      "note": "小样本职业教育情境；“未显著”不等于已证明严格等效。",
+      "source_ids": [
+        "S5"
+      ],
+      "footer": "Donkor，2010｜加纳砌筑与混凝土课程；35人视频组、34人印刷组。",
+      "narration": "任务类型也会改变结果。在一项加纳职业课程研究中，六十九名学习者的数据表明，视频组在实操和工艺表现上更好，但理论测验没有显著组间差异。这里有个重要细节：两组的理论部分都使用印刷教材，实操教材的形式才不同。因此，证据支持的是具体动作示范的价值，而不是所有知识都应该视频化。"
+    },
+    {
+      "id": "engagement",
+      "kind": "cards",
+      "kicker": "06 / 看下去，不等于学会",
+      "title": "观看数据告诉我们参与，不能代替理解测验",
+      "subtitle": "690万次观看会话，来自四门在线课程。",
+      "columns": [
+        {
+          "label": "GUO / KIM / RUBIN · 2014",
+          "title": "长度与制作方式有关",
+          "text": "原始摘要报告：较短视频\n往往有更高观看参与。"
+        },
+        {
+          "label": "指标边界",
+          "title": "会话 ≠ 人数",
+          "text": "观看时长、尝试答题，\n都不等于答对或记住。",
+          "highlight": true
+        }
+      ],
+      "note": "观察研究；不能据此宣布所有介绍视频的统一最佳时长。",
+      "source_ids": [
+        "S2"
+      ],
+      "footer": "Guo 等，2014｜edX日志；本轮核对原始摘要及引言，未引用“六分钟”阈值。",
+      "narration": "观看日志能提供另一种线索。一项覆盖四门在线课程、六百九十万次观看会话的研究发现，视频长度和制作方式与观看参与有关。但会话不是独立人数，尝试答题也不是答对。这个观察结果支持我们关注节奏和信息密度，却不能宣布任何介绍视频都有一个统一的最佳时长。"
+    },
+    {
+      "id": "design-principles",
+      "kind": "flow",
+      "kicker": "07 / 三种载体共享的设计原则",
+      "title": "降低理解负担，比增加刺激更重要",
+      "subtitle": "认知负荷研究给出的方向：让关键关系更容易被加工。",
+      "steps": [
+        {
+          "title": "删去无关信息",
+          "text": "每页或每段，\n只承担一个信息任务。"
+        },
+        {
+          "title": "分段与提示",
+          "text": "给出结构、关键词，\n让人知道看到哪里。"
+        },
+        {
+          "title": "证据靠近结论",
+          "text": "图表、标签和解释\n放在对应的位置。"
+        }
+      ],
+      "note": "原则依赖具体任务；保留字幕与可访问的文字版本。",
+      "source_ids": [
+        "S3"
+      ],
+      "footer": "Mayer & Moreno，2003｜理论与实验研究总结；静态图文也属于多媒体。",
+      "narration": "跨越这三种载体，更稳定的方向是降低理解负担。认知负荷研究强调，人的加工容量有限。删去无关信息，分段呈现关键步骤，让图表和解释靠近，有助于观众建立关系。这些原则也适用于静态图文。重点不是同时加入更多声音、动画和文字，而是帮助人抓住真正重要的内容。"
+    },
+    {
+      "id": "choose-by-task",
+      "kind": "decision",
+      "kicker": "08 / 如何选择载体",
+      "title": "先看任务，再选择形式",
+      "subtitle": "以下是按任务属性推导的使用建议，不是三载体的实证排名。",
+      "rows": [
+        {
+          "goal": "需要搜索、比对、引用、反复核查",
+          "format": "文档作为底稿"
+        },
+        {
+          "goal": "需要现场讲解、讨论、快速对齐",
+          "format": "PPT组织叙事"
+        },
+        {
+          "goal": "需要展示动作、过程、产品操作",
+          "format": "视频提供示范"
+        }
+      ],
+      "note": "受众、内容难度、使用环境和可用时间，都会改变选择。",
+      "footer": "制作建议｜基于前述研究与任务属性的推导，不代表商业转化结论。",
+      "narration": "实际制作时，可以先问：观众接下来要做什么？如果需要搜索、比较和反复核查，文档适合作为底稿。如果需要现场讲解和讨论，幻灯片便于组织叙事。如果要展示动作、操作或变化过程，视频能提供直接示范。这是按任务属性推导的建议，不是对三种载体做出科学的通用排名。"
+    },
+    {
+      "id": "combined-delivery",
+      "kind": "flow",
+      "kicker": "09 / 更实用的组合",
+      "title": "同一份研究，做成三种入口",
+      "subtitle": "让观众按自己的节奏，从概览进入细节。",
+      "steps": [
+        {
+          "title": "短视频建立理解",
+          "text": "展示问题、结论，\n以及最关键的过程。"
+        },
+        {
+          "title": "幻灯片支持讲解",
+          "text": "保留故事结构，\n便于演示和讨论。"
+        },
+        {
+          "title": "文档承载细节",
+          "text": "提供方法、数据、\n来源与可检索说明。"
+        }
+      ],
+      "note": "组合方案是制作建议；具体收益仍需在目标受众中验证。",
+      "footer": "实践建议｜提供字幕、章节和文字材料，给观众选择权。",
+      "narration": "很多时候，最实用的方案是组合：用短视频帮助观众建立第一层理解，用幻灯片支持讲解和讨论，再用文档承载方法、细节和出处。字幕、章节和文字材料，也让不同环境下的观众有选择。至于这种组合是否更受你的用户欢迎，还需要用真实受众验证。"
+    },
+    {
+      "id": "closing",
+      "kind": "closing",
+      "kicker": "结论 / 把形式选择变成可以验证的问题",
+      "title": "别只问“大家更喜欢哪一种”",
+      "subtitle": "还要问：理解是否准确？过几天还能记住吗？任务做成了吗？",
+      "quote": "接受度取决于人、任务和设计，\n不只取决于文件格式。",
+      "footline": "同等内容 · 可比时间 · 分开测量偏好与效果",
+      "footer": "文献核对：2026.11.07｜定向研究总结；主要证据来自教育与培训。",
+      "narration": "所以，别只问大家更喜欢哪一种。做一个内容和时间尽量可比的小测试，分别看愿不愿打开、是否看完、理解题答得怎样，以及过几天还能记住多少。接受程度取决于人、任务和设计，不只取决于文件格式。以上是基于教育与培训证据的定向总结，不能直接等同于商业转化结果。"
+    }
+  ]
+}
