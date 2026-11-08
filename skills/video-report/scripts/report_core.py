@@ -79,6 +79,11 @@ def validate_report(report: dict) -> list[str]:
         value = report.get(key, default)
         if not _number(value) or value < 0:
             errors.append(f'{key} must be a finite nonnegative number')
+    voice = report.get('voice', {})
+    if not isinstance(voice, dict):
+        errors.append('voice must be an object')
+    elif not _number(voice.get('speed', 1)) or not 0.5 <= voice.get('speed', 1) <= 2:
+        errors.append('voice.speed must be a finite multiplier between 0.5 and 2')
     return errors
 
 

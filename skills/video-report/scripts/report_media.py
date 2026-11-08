@@ -184,11 +184,25 @@ async def _edge_stream(text, voice, audio_path):
     return events
 
 
+def _tempo_pcm(data, speed, tools):
+    """Change speech tempo without changing pitch; keep raw TTS cache reusable."""
+    if speed == 1:
+        return data
+    with tempfile.TemporaryDirectory(prefix='video-report-tempo-') as scratch:
+        source, target = Path(scratch)/'source.wav', Path(scratch)/'faster.wav'
+        _write_pcm(source, data)
+        _run([tools['ffmpeg'], '-hide_banner', '-v', 'error', '-y', '-i', source,
+              '-af', f'atempo={speed:.9g}', '-ac', 1, '-ar', SAMPLE_RATE,
+              '-c:a', 'pcm_s16le', target], timeout=180)
+        return _speech_pcm(target)
+
+
 def _tts_audio(text, voice, cache_root, tools):
     """Synthesize one measured unit; publish cache metadata only after conversion."""
     cache_root = Path(cache_root)
     cache_root.mkdir(parents=True, exist_ok=True)
-    settings = {'name': 'zh-CN-XiaoxiaoNeural', 'rate': '+0%', 'pitch': '+0Hz', 'volume': '+0%', **voice}
+    defaults = {'name': 'zh-CN-XiaoxiaoNeural', 'rate': '+0%', 'pitch': '+0Hz', 'volume': '+0%'}
+    settings = {key: voice.get(key, default) for key, default in defaults.items()}
     payload = {'schema': CACHE_SCHEMA, 'provider': 'edge-tts', 'provider_version': _provider_version(),
                'text': text, 'voice': settings, 'sample_rate': SAMPLE_RATE}
     key = cache_key(payload)
@@ -226,7 +240,7 @@ def _tts_audio(text, voice, cache_root, tools):
     raise RuntimeError(f'TTS failed after 3 attempts for {text[:60]!r}: {last_error}') from last_error
 
 
-def _event_captions(events, text, duration_ms, max_chars):
+def _event_captions(events, text, duration_ms, max_chars, speed=1):
     words = [e for e in events if e.get('type') == 'WordBoundary']
     if words:
         # Provider word tokens often omit punctuation. Restore only characters
@@ -254,8 +268,8 @@ def _event_captions(events, text, duration_ms, max_chars):
     selected = words or [e for e in events if e.get('type') == 'SentenceBoundary']
     converted = []
     for event in selected:
-        start = max(0.0, float(event.get('offset', 0)) / 10000)
-        end = min(duration_ms, start + float(event.get('duration', 0)) / 10000)
+        start = max(0.0, float(event.get('offset', 0)) / 10000 / speed)
+        end = min(duration_ms, (float(event.get('offset', 0)) + float(event.get('duration', 0))) / 10000 / speed)
         if end > start and str(event.get('text', '')).strip():
             converted.append({'start_ms': start, 'end_ms': end, 'text': event['text'],
                               'type': 'word' if words else 'sentence'})
@@ -303,6 +317,7 @@ def prepare_audio(report: dict, output: Path, report_dir: Path) -> tuple[list, l
     voice = report.get('voice', {})
     if not isinstance(voice, dict):
         raise ValueError('voice must be an object')
+    speed = float(voice.get('speed', 1))
     lead = round(report.get('lead_ms', 150) * SAMPLE_RATE / 1000)
     tail = round(report.get('tail_ms', 350) * SAMPLE_RATE / 1000)
     max_chars = report.get('max_caption_chars', 36)
@@ -321,6 +336,12 @@ def prepare_audio(report: dict, output: Path, report_dir: Path) -> tuple[list, l
             _normalize_audio(source, normalized, tools)
             pcm = _speech_pcm(normalized)
             local_captions = _external_captions(scene, len(pcm) / 2 / SAMPLE_RATE * 1000, max_chars)
+            pcm = _tempo_pcm(pcm, speed, tools)
+            if speed != 1:
+                duration_ms = len(pcm) / 2 / SAMPLE_RATE * 1000
+                local_captions = [{**cue, 'start_ms': cue['start_ms']/speed,
+                                   'end_ms': min(duration_ms, cue['end_ms']/speed)}
+                                  for cue in local_captions]
             source_kind = 'external'
         else:
             segments = scene.get('narration_segments') or [{'text': scene['narration']}]
@@ -331,19 +352,22 @@ def prepare_audio(report: dict, output: Path, report_dir: Path) -> tuple[list, l
                 spoken = segment.get('spoken', display)
                 cached = _tts_audio(spoken, voice, cache_root, tools)
                 data = _speech_pcm(cached['wave'])
+                source_samples = len(data) // 2
+                data = _tempo_pcm(data, speed, tools)
                 samples = len(data) // 2
                 duration_ms = samples * 1000 / SAMPLE_RATE
                 if display != spoken:
                     unit_captions = make_captions([{'start_ms': 0, 'end_ms': duration_ms, 'text': display, 'type': 'segment'}], max_chars)
                 else:
-                    unit_captions = _event_captions(cached['events'], display, duration_ms, max_chars)
+                    unit_captions = _event_captions(cached['events'], display, duration_ms, max_chars, speed=speed)
                 for caption in unit_captions:
                     local_captions.append({**caption, 'start_ms': caption['start_ms'] + offset_samples * 1000 / SAMPLE_RATE,
                                            'end_ms': caption['end_ms'] + offset_samples * 1000 / SAMPLE_RATE})
                 chunks.append(data)
                 offset_samples += samples
                 cache_entries.append({'key': cached['cache_key'], 'hit': cached['cache_hit'], 'text': display,
-                                      'spoken': spoken, 'duration_samples': samples})
+                                      'spoken': spoken, 'duration_samples': samples,
+                                      'source_duration_samples': source_samples, 'speed': speed})
             pcm = b''.join(chunks)
             source_kind = 'edge-tts'
         scene_data = b'\0\0' * lead + pcm + b'\0\0' * tail

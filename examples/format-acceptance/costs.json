@@ -1,17 +1,17 @@
 {
   "scope": "This pipeline build only; excludes agent research, software development and initial setup.",
-  "build_elapsed_seconds": 58.36,
+  "build_elapsed_seconds": 57.54,
   "stage_elapsed_seconds": {
-    "audio": 0.27,
-    "render": 3.14,
-    "encode": 31.33,
-    "check": 23.39
+    "audio": 19.75,
+    "render": 2.66,
+    "encode": 25.79,
+    "check": 9.11
   },
   "audio": {
-    "units": 11,
-    "cache_hits": 11,
-    "new_synthesis_units": 0,
-    "new_synthesis_characters": 0,
+    "units": 8,
+    "cache_hits": 0,
+    "new_synthesis_units": 8,
+    "new_synthesis_characters": 533,
     "providers": [
       "edge-tts"
     ],
@@ -24,5 +24,5 @@
   "local_electricity_and_hardware_cost_cny": null,
   "total_cost_cny": null,
   "total_cost_note": "Unknown model billing, local power and equipment cost are not treated as zero.",
-  "output_video_bytes": 11727393
+  "output_video_bytes": 3751439
 }

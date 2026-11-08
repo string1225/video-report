@@ -31,7 +31,7 @@ Chromium版本由锁定的Playwright包确定，便携下载检查ZIP CRC、解�
 .venv/Scripts/python.exe skills/video-report/scripts/video_report.py check output/format-acceptance
 ```
 
-实测成片：11页，约4分41秒，1920×1080、30fps，中文神经配音。字幕使用真实词边界按完整句子重组为46条，长句在同一条内分两行。文献证据见 [研究核对](docs/research/format-acceptance-evidence.md)，制作与验收记录见 [案例QA](examples/format-acceptance/qa-summary.json)。媒体文件在本地 `output/`，不会随源码提交。
+当前精简版：8页，约1分35秒，1920×1080、30fps；口播由1,313字精简至533字。保留原TTS基准语速 `+5%`，再按 `voice.speed: 1.25` 保音高变速；22条整句字幕随音频同步缩放，长句可分两行。文献证据见 [研究核对](docs/research/format-acceptance-evidence.md)，制作与验收记录见 [案例QA](examples/format-acceptance/qa-summary.json)。媒体文件在本地 `output/`，不会随源码提交。
 
 ## 安装为个人 skill
 
