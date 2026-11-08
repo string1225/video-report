@@ -1,4 +1,4 @@
 interface:
-  display_name: "Video Report · 调研视频"
-  short_description: "将调研、总结或概述制作成可编辑的HTML演示、配音字幕与视频"
-  default_prompt: "使用 $video-report，把现有材料做成有来源依据的中文演示视频，保留可编辑HTML和字幕。"
+  display_name: "Video Report · 制作与发布"
+  short_description: "制作带配音字幕的HTML演示与视频，按需准备五平台草稿并支持恢复上传"
+  default_prompt: "使用 $video-report，把现有材料做成有来源依据的中文演示视频，保留可编辑HTML和字幕；若本次要求上传，继续准备指定平台草稿。"

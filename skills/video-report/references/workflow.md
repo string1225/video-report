@@ -29,3 +29,7 @@
 `video.mp4`、`deck/index.html` 与 `theme.css`、`voice.wav`、`subtitles.srt/ass`、`report.json`、`storyboard.md`、`sources.json`、`timeline.json`、`captions.json`、`manifest.json`、`qa.json`、封面及联系表。
 
 生成目录还包含缓存与阶段记录，便于恢复。日常交付链接指向关键产物，不必要求观众理解实现细节。需要独立移动交付目录时，保持 HTML 的相对文件结构完整。
+
+## 按需继续发布
+
+用户要求上传或发布时，完成成片 QA 后按 [发布与成片交接](publishing.md) 使用本次精确 `video.mp4`，复用已经确认的标题和封面意图。将发布内容包与制作 `report.json` 分开保存。没有发布要求就交付制作产物；发布依赖缺失时保留制作成果并报告缺项，不重做视频。

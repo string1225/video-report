@@ -38,3 +38,9 @@ Linux/macOS先用系统包管理器安装完整FFmpeg；例如已有brew环境�
 缓存按文本、声音、语速、服务版本和schema保存。未完成的合成不写完成标记；改画面不重新请求相同配音。视频片段按截图内容、帧数和编码设置缓存。`manifest.json` 记录每阶段状态；修复后重复 `build`。
 
 FFmpeg实际支持的字幕、编码器和音频滤镜以 `doctor.py` 为准。音量/真峰值规范、音乐混音、商业配音服务、批量渲染应按具体任务另行增加，不在当前脚本中暗示已经实现。
+
+## 可选发布环境
+
+只有上传或发布任务需要 Node.js 18+、Ego Lite、可用的 `ego-browser` 和在 Ego Lite 中登录的创作者账号。内置 `publisher/` 使用 Node 内置模块，不需要 npm install；Python 的 `bootstrap.py` 和 `doctor.py` 只负责制作环境，不安装或验证发布浏览器。现成视频可直接进入发布流程，不必安装配音和渲染依赖。
+
+路径、配置检查及账号 onboarding 见 [发布与成片交接](publishing.md)。Windows 使用内置 `.cmd` 或直接调用 `node publisher/scripts/v2/publisher.mjs`；含中文或空格的路径加引号。生产脚本直接通过 UTF-8 stdin 调用 Ego；中文 Windows 输出按严格 UTF-8 解码，必要时回退 GB18030。不要用 PowerShell 文本管道重写这条输入通道。
