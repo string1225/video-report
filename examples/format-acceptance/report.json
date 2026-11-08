@@ -381,7 +381,11 @@
         "S1"
       ],
       "footer": "Noetel 等，2021｜高等教育综述；原始摘要核对。",
-      "narration": "一项高等教育综述汇总了一百零五项试验、七千七百七十六名学生。视频替代原教学时，效应量为零点二八；作为补充时，为零点八零。两种比较不同，效应量也不是百分比。"
+      "narration": "一项高等教育综述汇总了一百零五项试验、七千七百七十六名学生。视频替代原教学时，效应量为零点二八；作为补充时，为零点八零。两种比较不同，效应量也不是百分比。",
+      "reveal_cues": [
+        1,
+        1
+      ]
     },
     {
       "id": "slides-design",
@@ -407,7 +411,16 @@
         "S4"
       ],
       "footer": "Garner & Alley，2013｜作者论文摘要核对。",
-      "narration": "PPT的效果取决于设计。一项涉及一百一十名工程学生的研究发现，结论句配合视觉证据，比常规项目符号式页面更有助于理解和回忆。这里比较的是幻灯片设计。"
+      "narration": "PPT的效果取决于设计。一项涉及一百一十名工程学生的研究发现，结论句配合视觉证据，比常规项目符号式页面更有助于理解和回忆。这里比较的是幻灯片设计。",
+      "media": {
+        "id": "M1",
+        "caption": "现场讲解示意，非该研究现场",
+        "fit": "contain"
+      },
+      "reveal_cues": [
+        0,
+        1
+      ]
     },
     {
       "id": "practical-vs-theory",
@@ -433,7 +446,25 @@
         "S5"
       ],
       "footer": "Donkor，2010｜35人视频组、34人印刷组；未显著不等于等效。",
-      "narration": "视频适合展示动作和步骤。一项六十九人的实操研究中，视频组操作表现更好；理论测验没有显著差异，而且两组理论部分都用教材。优势要放回具体任务看。"
+      "narration": "视频适合展示动作和步骤。一项六十九人的实操研究中，视频组操作表现更好；理论测验没有显著差异，而且两组理论部分都用教材。优势要放回具体任务看。",
+      "media": {
+        "id": "M4",
+        "caption": "绳结步骤示意，非研究现场",
+        "fit": "contain",
+        "switches": [
+          {
+            "cue": 1,
+            "offset_ms": 4000,
+            "id": "M3",
+            "caption": "Donkor 2010 原文表2：实操测验成绩",
+            "fit": "contain"
+          }
+        ]
+      },
+      "reveal_cues": [
+        0,
+        1
+      ]
     },
     {
       "id": "engagement",
@@ -459,7 +490,11 @@
         "S2"
       ],
       "footer": "Guo 等，2014｜观看日志研究；不代表知识测验。",
-      "narration": "六百九十万次在线课程观看记录提示，长度和制作方式会影响观看参与。但看得久、愿意答题，不代表真正学会。介绍视频应短而聚焦，效果仍要单独测。"
+      "narration": "六百九十万次在线课程观看记录提示，长度和制作方式会影响观看参与。但看得久、愿意答题，不代表真正学会。介绍视频应短而聚焦，效果仍要单独测。",
+      "reveal_cues": [
+        0,
+        1
+      ]
     },
     {
       "id": "choose-by-task",
@@ -483,7 +518,12 @@
       ],
       "note": "按任务推导的建议，不是媒介排名。",
       "footer": "制作建议｜结合研究与任务属性推导，需在目标受众验证。",
-      "narration": "因此，需要搜索、比对和反复核查，用文档；需要现场讲解和讨论，用PPT；需要展示动作、操作和变化过程，用视频。这是按任务推导的建议，不是通用排名。"
+      "narration": "因此，需要搜索、比对和反复核查，用文档；需要现场讲解和讨论，用PPT；需要展示动作、操作和变化过程，用视频。这是按任务推导的建议，不是通用排名。",
+      "media": {
+        "id": "M2",
+        "caption": "纸质资料阅读情境示意",
+        "fit": "contain"
+      }
     },
     {
       "id": "closing",
@@ -502,6 +542,118 @@
     "previous_scene_count": 11,
     "previous_narration_characters": 1313,
     "previous_duration_seconds": 281.466667,
-    "speech_speed_multiplier": 1.25
-  }
+    "speech_speed_multiplier": 1.25,
+    "visual_update": "真实素材、字幕时间轴驱动的渐显/图表增长/进度变化，以及逐帧动态MP4。"
+  },
+  "motion": {
+    "enabled": true
+  },
+  "output_license": "CC BY-SA 4.0",
+  "media": [
+    {
+      "id": "M1",
+      "type": "image",
+      "title": "Freies Wissen Fellow Presentation",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Freies_Wissen_Fellow_Presentation.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Freies_Wissen_Fellow_Presentation.jpg",
+      "creator": "Ralf Rebmann / Wikimedia Deutschland",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "“Freies Wissen Fellow Presentation”, Ralf Rebmann / Wikimedia Deutschland, CC BY-SA 4.0. Original photo; no pixel modification.",
+      "usage_caption": "现场讲解示意｜Ralf Rebmann / Wikimedia Deutschland · CC BY-SA 4.0",
+      "changes": "原始JPEG逐字节复制；未裁切或改色。",
+      "evidence_file": "output/source-downloads/photo-candidates-metadata.json",
+      "sha256": "5f47798ee6538c9742f0ade9f9d991d9aad9b6aa228ffd2c9ae155bcf327fd78",
+      "bytes": 125115,
+      "width": 1200,
+      "height": 800,
+      "path": "assets/presentation-lecture.jpg",
+      "credit": "Ralf Rebmann / Wikimedia Deutschland · CC BY-SA 4.0"
+    },
+    {
+      "id": "M2",
+      "type": "image",
+      "title": "The fantastic world of reading ... a document",
+      "source_url": "https://commons.wikimedia.org/wiki/File:The_fantastic_world_of_reading_..._a_document_(27184970803).jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/The_fantastic_world_of_reading_..._a_document_%2827184970803%29.jpg",
+      "creator": "Ștefan Jurcă",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "attribution": "“The fantastic world of reading ... a document”, Ștefan Jurcă, CC BY 2.0; cropped to reader and paper, JPEG recompressed.",
+      "usage_caption": "纸质资料阅读示意｜Ștefan Jurcă · CC BY 2.0 · 已裁切",
+      "changes": "原图2048×1360；裁切框(1550,690,2000,1160)，重存JPEG。",
+      "evidence_file": "output/source-downloads/reading-document-metadata.json",
+      "sha256": "be2464b79055f72e9a0e3f2450e110b678a3dd04fc3aff4949c40ceb66b798e8",
+      "bytes": 60845,
+      "width": 450,
+      "height": 470,
+      "path": "assets/reading-document.jpg",
+      "credit": "Ștefan Jurcă · CC BY 2.0 · 已裁切"
+    },
+    {
+      "id": "M3",
+      "type": "image",
+      "title": "Donkor (2010), Table 2: Results of T-Test Analysis for the Performance Test",
+      "source_url": "https://www.irrodl.org/index.php/irrodl/article/view/792",
+      "download_url": "https://www.irrodl.org/index.php/irrodl/article/download/792/1506",
+      "creator": "Francis Donkor",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Francis Donkor (2010), The Comparative Instructional Effectiveness of Print-Based and Video-Based Instructional Materials for Teaching Practical Skills at a Distance, IRRODL 11(1), Table 2, printed p.105. CC BY 4.0. Rendered from publisher PDF and cropped; no numerical edits.",
+      "usage_caption": "原文表2｜Donkor，2010，p.105 · CC BY 4.0 · 已裁切",
+      "changes": "官方PDF第10页(印刷页105)由Poppler 160dpi渲染，裁切保留表名、表头、两组数据和显著性脚注；未重绘或修改数字。",
+      "source_page": 10,
+      "printed_page": 105,
+      "evidence_file": "output/source-downloads/donkor-2010-article.html",
+      "sha256": "b0bcf1c1de973fb17224e1a298702111761d8180a63b555ac7191d88a5743c5e",
+      "bytes": 38364,
+      "width": 1000,
+      "height": 375,
+      "path": "assets/donkor-performance-table.png",
+      "credit": "Francis Donkor · CC BY 4.0 · 原文表2裁切"
+    },
+    {
+      "id": "M4",
+      "type": "video",
+      "title": "Palstek Bowline — 6-second instructional excerpt",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Palstek_Bowline.ogv",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Palstek_Bowline.ogv",
+      "creator": "Zybukin",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "“Palstek Bowline”, Zybukin, CC BY-SA 3.0. Excerpt 00:13–00:19, transcoded to VP9/WebM at 30fps with square-pixel normalization, audio omitted. This adapted excerpt is distributed under CC BY-SA 3.0.",
+      "clip_start_seconds": 13,
+      "duration_seconds": 6,
+      "original_duration_seconds": 37.957726,
+      "usage_caption": "绳结步骤示意，非研究现场｜Zybukin · CC BY-SA 3.0 · 节选/静音",
+      "changes": "原片13–19秒；原速，统一30fps，VP9/WebM转码，无音轨。原编码640×424、SAR163:160，规范化为652×424、SAR1:1以保留显示比例；无时间压缩或倒放。",
+      "evidence_file": "output/source-downloads/bowline-metadata.json",
+      "adaptation_license": "CC BY-SA 3.0",
+      "sha256": "454a533c4531d8ddf805d7385c3e656cd8a89b310fdd75e36c441c448495ff53",
+      "bytes": 446295,
+      "width": 652,
+      "height": 424,
+      "fps": 30,
+      "audio_streams": 0,
+      "browser_verification": {
+        "engine": "Ego Lite Chromium",
+        "result": "VP9 canPlayType=probably; decoded, seeked to 2.0 seconds successfully",
+        "duration_seconds": 6,
+        "audio_streams": 0
+      },
+      "verification": {
+        "ffmpeg_full_decode": "passed",
+        "decoded_frames": 180,
+        "unique_frame_hashes": 180,
+        "square_pixels": true,
+        "browser_seek_seconds": 2,
+        "browser_decoded_dimensions": [
+          652,
+          424
+        ]
+      },
+      "path": "assets/bowline-steps.webm",
+      "credit": "Zybukin · CC BY-SA 3.0 · 节选 / 静音"
+    }
+  ]
 }

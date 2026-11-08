@@ -59,7 +59,9 @@ New-Item -ItemType Junction -Path $skillDestination -Target $skillSource
 
 完整构建还输出 `costs.json`，报告实测阶段耗时、缓存与新增合成量。当前没有配置收费配音API；模型／订阅、电力等未提供账单的成本保持未知，不能将总成本一概记为零。案例最新成本见 [成本记录](examples/format-acceptance/costs.json)。
 
-当前采用静态页面与硬切。已有录音可配合内联 `scene.captions` 使用；外部SRT需先转换成这些记录。任意自定义SSML、ASR、Remotion、Azure适配器、PPTX导入、持续动画与无人值守自动发布不在已实现功能中。
+支持真实图片、静音视频、标题/卡片逐项显现、图表增长与进度变化；按旁白时间轴逐帧导出MP4。案例包含3张图片与1段6秒实拍，并在动作页切换到原文表格；示意素材明确标注，署名与许可随文件交付。输入、裁剪命令与动态QA见 [素材与动画](skills/video-report/references/media-and-motion.md)。新增报告默认启用motion；旧的纯静态报告仍可构建。
+
+已有录音可配合内联 `scene.captions` 使用；外部SRT需先转换成这些记录。任意自定义SSML、ASR、Remotion、Azure适配器、PPTX导入与无人值守自动发布不在已实现功能中。
 
 ## 多平台发布草稿
 

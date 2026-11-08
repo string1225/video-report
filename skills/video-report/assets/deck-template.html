@@ -56,4 +56,4 @@ document.querySelector('#play').onclick=async()=>{if(audio.paused){await audio.p
 function navigate(d){let i=Math.max(0,Math.min(report.scenes.length-1,window.currentScene+d));if(timeline[i])audio.currentTime=timeline[i].start_ms/1000;window.showScene(i);}
 document.querySelector('#previous').onclick=()=>navigate(-1);document.querySelector('#next').onclick=()=>navigate(1);document.querySelector('#seek').oninput=e=>{audio.currentTime=e.target.value/1000*duration();window.renderAt(audio.currentTime*1000);};
 addEventListener('keydown',e=>{if(e.key==='ArrowRight')navigate(1);if(e.key==='ArrowLeft')navigate(-1);if(e.code==='Space'){e.preventDefault();document.querySelector('#play').click();}});window.showScene(0);
-</script></body></html>
+</script><script src="motion-runtime.js"></script></body></html>

@@ -419,6 +419,16 @@ def _ffconcat_quote(path):
 def encode_video(output: Path, report: dict, timeline: list, images: list[Path]) -> dict:
     output = Path(output).resolve()
     tools = resolve_tools()
+    if report.get('motion', {}).get('enabled') or any(item.get('type') == 'video' for item in report.get('media', [])):
+        from report_animation import render_motion
+        for name in ('voice.wav', 'subtitles.ass'):
+            if not (output/name).is_file():
+                raise RuntimeError(f'Audio preparation must create {name} before encoding')
+        joined, motion_qa = render_motion(output, report, timeline, tools)
+        result = _mux_video(output, report, timeline, joined, tools, 'deterministic_frames')
+        result['motion_cache_hit'] = motion_qa['cache_hit']
+        _atomic_json(output/'encoding.json', result)
+        return result
     if not timeline or len(images) != len(timeline):
         raise ValueError('One image is required for every timeline scene')
     for file in ('voice.wav', 'subtitles.ass'):
@@ -458,6 +468,12 @@ def encode_video(output: Path, report: dict, timeline: list, images: list[Path])
     joined = cache / 'joined.mp4'
     _run([tools['ffmpeg'], '-hide_banner', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', concat,
           '-an', '-c:v', 'copy', joined], timeout=180)
+    return _mux_video(output, report, timeline, joined, tools, 'static_slides')
+
+
+def _mux_video(output, report, timeline, joined, tools, render_mode):
+    width, height, fps = report.get('width', 1920), report.get('height', 1080), report.get('fps', 30)
+    fps_string = str(fps)
     frames = timeline[-1]['end_frame']
     duration = frames / fps
     temporary = output / ('video.' + uuid.uuid4().hex + '.tmp.mp4')
@@ -472,8 +488,10 @@ def encode_video(output: Path, report: dict, timeline: list, images: list[Path])
         temporary.unlink(missing_ok=True)
     result = {'path': str(output / 'video.mp4'), 'width': width, 'height': height, 'fps': fps,
               'frames': frames, 'duration_seconds': duration, 'video_codec': 'h264', 'audio_codec': 'aac',
-              'subtitle_burned': True, 'scenes': len(timeline)}
+              'subtitle_burned': True, 'scenes': len(timeline), 'render_mode': render_mode}
     _atomic_json(output / 'encoding.json', result)
+    if render_mode == 'static_slides':
+        (output/'motion-qa.json').unlink(missing_ok=True)
     return result
 
 

@@ -28,17 +28,24 @@ def _json_script(value):
     return json.dumps(value, ensure_ascii=False).replace('<', '\\u003c').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
 
 
-def write_deck(report: dict, output: Path, timeline=None, captions=None) -> Path:
+def write_deck(report: dict, output: Path, timeline=None, captions=None, report_dir=None) -> Path:
     output = Path(output)
     deck = output / 'deck'
     deck.mkdir(parents=True, exist_ok=True)
+    from report_assets import package_media
+    embedded = package_media(report, output, Path(report_dir or Path.cwd()))
     template = (ASSETS / 'deck-template.html').read_text(encoding='utf-8')
-    values = {'REPORT': _json_script(report), 'TIMELINE': _json_script(timeline or []),
+    values = {'REPORT': _json_script(embedded), 'TIMELINE': _json_script(timeline or []),
               'CAPTIONS': _json_script(captions or [])}
     template = re.sub(r'__(REPORT|TIMELINE|CAPTIONS)__', lambda match: values[match[1]], template)
     (deck / 'index.html').write_text(template, encoding='utf-8')
     shutil.copy2(ASSETS / 'theme.css', deck / 'theme.css')
-    (output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+    shutil.copy2(ASSETS / 'motion-runtime.js', deck / 'motion-runtime.js')
+    import copy
+    portable = copy.deepcopy(embedded)
+    for item in portable.get('media', []):
+        item['path'] = 'deck/' + item['path']
+    (output / 'report.json').write_text(json.dumps(portable, ensure_ascii=False, indent=2), encoding='utf-8')
     (output / 'sources.json').write_text(json.dumps(report.get('sources', []), ensure_ascii=False, indent=2), encoding='utf-8')
     lines = [f"# {report['title']}", '']
     for i, scene in enumerate(report['scenes'], 1):
@@ -69,6 +76,7 @@ def capture_slides(report: dict, output: Path) -> tuple[list[Path], dict]:
                 raise RuntimeError('Presentation did not initialize')
             for i, scene in enumerate(report['scenes']):
                 page.evaluate('(index) => window.showScene(index)', i)
+                page.evaluate('() => window.prepareMedia()')
                 page.evaluate("async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode())); }")
                 issues = page.evaluate('window.layoutIssues()')
                 if issues:
@@ -110,7 +118,7 @@ def capture_slides(report: dict, output: Path) -> tuple[list[Path], dict]:
         finally:
             browser.close()
     make_contact_sheet(images, output)
-    qa = {'browser': 'Playwright Chromium', 'browser_plugin': 'Browser plugin not available',
+    qa = {'browser': 'Playwright Chromium', 'purpose': 'Project renderer and deterministic export QA',
           'viewport': [width, height], 'scene_count': len(images), 'page_errors': errors,
           'overflow': False, 'navigation': 'passed', 'play_pause': 'passed', 'pause_confirmed': paused, 'seek': seek}
     (output/'render-qa.json').write_text(json.dumps(qa, ensure_ascii=False, indent=2), encoding='utf-8')

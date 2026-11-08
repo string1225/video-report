@@ -1,7 +1,10 @@
 {
   "research_checked_on": "2026-11-07",
+  "visual_update_checked_on": "2026-11-08",
   "title": "PPT、文档、介绍视频：人们更容易接受哪一种？",
   "scene_count": 8,
+  "narration_characters": 533,
+  "relative_voice_speed": 1.25,
   "media": {
     "passed": true,
     "errors": [],
@@ -34,7 +37,7 @@
     },
     "presentation": {
       "browser": "Playwright Chromium",
-      "browser_plugin": "Browser plugin not available",
+      "purpose": "Project renderer and deterministic export QA",
       "viewport": [
         1920,
         1080
@@ -53,47 +56,100 @@
       }
     }
   },
+  "motion": {
+    "mode": "deterministic_frames",
+    "frames": 2859,
+    "fps": 30,
+    "cache_hit": false,
+    "clock": "frame_index / fps; narration sample timeline",
+    "video_frames_rendered": 195,
+    "media_seek_verified": true,
+    "page_errors": [],
+    "overflow": false
+  },
+  "motion_sampled_layout_states": 24,
   "assistant_visual_review": {
     "reviewer": "assistant",
     "contact_sheet": "contact-sheet.png",
-    "video_frames": [
-      "quality/concise-intro.png",
-      "quality/concise-long.png",
-      "quality/concise-ending.png"
-    ],
+    "encoded_frame_times_seconds": {
+      "motion-opening": 1.1,
+      "motion-topics-early": 10.6,
+      "motion-topics-late": 14.0,
+      "motion-bars-mid": 24.4,
+      "motion-lecture": 37.0,
+      "motion-action-a": 47.5,
+      "motion-action-b": 49.5,
+      "motion-paper-table": 53.2,
+      "motion-reading": 77.0,
+      "motion-ending": 94.0
+    },
     "observations": [
-      "All eight scenes inspected via contact sheet.",
-      "Long sentence stays on one cue and at most two lines without covering sources.",
-      "Encoded frames inspected after relative 1.25x tempo change."
+      "All eight scenes inspected on contact sheet.",
+      "Encoded topic cards show early and late reveal states; progress changes.",
+      "Bar growth intermediate state inspected.",
+      "Lecture/document photographs, live knot steps and subsequent original paper table inspected.",
+      "Long subtitles remain a single complete sentence cue and use at most two lines.",
+      "Ending/source/subtitle safe areas inspected."
     ],
-    "full_manual_listening": "not_performed"
+    "full_manual_listening": "not_performed",
+    "narration_reused_unchanged": true
+  },
+  "encoded_motion_verification": {
+    "timestamps_seconds": {
+      "motion-opening": 1.1,
+      "motion-topics-early": 10.6,
+      "motion-topics-late": 14.0,
+      "motion-bars-mid": 24.4,
+      "motion-lecture": 37.0,
+      "motion-action-a": 47.5,
+      "motion-action-b": 49.5,
+      "motion-paper-table": 53.2,
+      "motion-reading": 77.0,
+      "motion-ending": 94.0
+    },
+    "action_picture_region": [
+      1060,
+      390,
+      1824,
+      700
+    ],
+    "action_picture_mean_absolute_rgb_change": 23.391539998874066,
+    "source_video_different_decoded_frames": 180,
+    "source_video_frames": 180,
+    "narration_unchanged_from_commit": "948a794",
+    "voice_unchanged": true
+  },
+  "external_assets": {
+    "images": 3,
+    "videos": 1,
+    "video_excerpt_seconds": 6,
+    "total_bytes": 670619,
+    "license_manifest": "assets/sources.json",
+    "composition_license": "CC BY-SA 4.0"
   },
   "tests": {
     "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
-    "run": 46,
+    "run": 56,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
-  "skill_validation": "skill-creator quick_validate.py passed",
+  "publisher_regression": {
+    "tests": 149,
+    "passed": 149,
+    "online_actions": "not_performed"
+  },
+  "skill_validation": "skill-creator quick_validate.py passed with UTF-8",
   "installed_skill": "~/.codex/skills/video-report (directory junction to repository skill source)",
   "audio_cache": {
     "units": 8,
-    "cache_hits": 0,
-    "new_synthesis_units": 8
-  },
-  "chinese_and_space_path_smoke": {
-    "passed": true,
-    "video": {
-      "codec": "h264",
-      "width": 1920,
-      "height": 1080,
-      "pixel_format": "yuv420p",
-      "fps": 30.0,
-      "frames": 1281,
-      "duration_seconds": 42.7
-    },
-    "path": "output/验证 中文路径/短样片"
+    "cache_hits": 8,
+    "new_synthesis_units": 0,
+    "new_synthesis_characters": 0,
+    "providers": [
+      "edge-tts"
+    ],
+    "note": "Units describe completed synthesis jobs, not HTTP requests or failed retries."
   },
   "runtime": {
     "python": "3.14.3",
@@ -121,58 +177,14 @@
       "height": 42
     }
   },
-  "video_sha256": "57f123ec28454ac2f96190522d9b782ba8792b90b8d144a8abde19c8771c496d",
-  "delivery": "Generated media are local under output/format-acceptance and excluded from Git; report, research, scripts, and QA are versioned.",
-  "subtitle_revision_checked_on": "2026-11-08",
-  "subtitle_sentence_review": {
-    "policy": "one complete sentence per cue",
-    "all_scene_sentences_match_narration": true,
-    "previous_cue_count": 46,
-    "cue_count": 22,
-    "two_line_cues": 3,
-    "maximum_line_characters": 33,
-    "maximum_sentence_characters": 54
-  },
-  "costs": {
-    "scope": "This pipeline build only; excludes agent research, software development and initial setup.",
-    "build_elapsed_seconds": 57.54,
-    "stage_elapsed_seconds": {
-      "audio": 19.75,
-      "render": 2.66,
-      "encode": 25.79,
-      "check": 9.11
-    },
-    "audio": {
-      "units": 8,
-      "cache_hits": 0,
-      "new_synthesis_units": 8,
-      "new_synthesis_characters": 533,
-      "providers": [
-        "edge-tts"
-      ],
-      "note": "Units describe completed synthesis jobs, not HTTP requests or failed retries."
-    },
-    "direct_external_service_cost_cny": 0,
-    "direct_service_basis": "No paid API credentials or billable service configured in the implemented edge-tts/external-audio pipeline.",
-    "model_cost_cny": null,
-    "model_usage": "Not exposed to this script; use the actual Codex/API usage or subscription bill.",
-    "local_electricity_and_hardware_cost_cny": null,
-    "total_cost_cny": null,
-    "total_cost_note": "Unknown model billing, local power and equipment cost are not treated as zero.",
-    "output_video_bytes": 3751439
-  },
-  "concise_revision": {
-    "summary": "精简文案并在原+5%语速基础上再加速1.25倍",
-    "previous_scene_count": 11,
-    "previous_narration_characters": 1313,
-    "previous_duration_seconds": 281.466667,
-    "speech_speed_multiplier": 1.25
-  },
-  "voice_speed_review": {
-    "base_rate": "+5%",
-    "relative_speed_multiplier": 1.25,
-    "method": "FFmpeg atempo, pitch preserved; boundary times scaled by 1.25",
-    "source_speech_seconds": 114.264,
-    "processed_speech_seconds": 91.28266666666667
+  "independent_review": {
+    "important_findings": 4,
+    "status": "all_fixed_and_retested",
+    "topics": [
+      "video clock after media switch",
+      "late-loaded media sync on paused seek",
+      "stale dynamic QA after static rebuild",
+      "obsolete generated media without credits"
+    ]
   }
 }

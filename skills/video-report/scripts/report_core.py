@@ -39,6 +39,31 @@ def validate_report(report: dict) -> list[str]:
         if source['id'] in source_ids:
             errors.append(f'duplicate source id: {source["id"]}')
         source_ids.add(source['id'])
+    motion = report.get('motion', {})
+    if not isinstance(motion, dict) or not isinstance(motion.get('enabled', False), bool):
+        errors.append('motion.enabled must be boolean')
+    media_ids = set()
+    media = report.get('media', [])
+    if not isinstance(media, list):
+        errors.append('media must be a list')
+        media = []
+    for index, item in enumerate(media):
+        prefix = f'media[{index}]'
+        if not isinstance(item, dict):
+            errors.append(f'{prefix} must be an object')
+            continue
+        for field in ('id', 'path', 'title', 'source_url', 'creator', 'license', 'attribution'):
+            if not isinstance(item.get(field), str) or not item[field].strip():
+                errors.append(f'{prefix}.{field} must be a nonempty string')
+        identifier = item.get('id')
+        if isinstance(identifier, str):
+            if identifier in media_ids:
+                errors.append(f'duplicate media id: {identifier}')
+            media_ids.add(identifier)
+        if item.get('type') not in ('image', 'video'):
+            errors.append(f'{prefix}.type must be image or video')
+        if 'sha256' in item and not re.fullmatch(r'[a-fA-F0-9]{64}', str(item['sha256'])):
+            errors.append(f'{prefix}.sha256 must contain 64 hexadecimal characters')
     scenes = report.get('scenes')
     if not isinstance(scenes, list) or not scenes:
         errors.append('scenes must be a nonempty list')
@@ -75,6 +100,32 @@ def validate_report(report: dict) -> list[str]:
             for ref in refs:
                 if not isinstance(ref, str) or ref not in source_ids:
                     errors.append(f'{prefix} references unknown source: {ref}')
+        visual = scene.get('media')
+        if visual is not None:
+            if not isinstance(visual, dict) or not isinstance(visual.get('id'), str) or visual['id'] not in media_ids:
+                errors.append(f'{prefix} references unknown media')
+            else:
+                if visual.get('fit', 'contain') not in ('contain', 'cover'):
+                    errors.append(f'{prefix}.media.fit must be contain or cover')
+                if not isinstance(visual.get('loop', False), bool):
+                    errors.append(f'{prefix}.media.loop must be boolean')
+                switches = visual.get('switches', [])
+                if not isinstance(switches, list):
+                    errors.append(f'{prefix}.media.switches must be a list')
+                else:
+                    for switch in switches:
+                        if not isinstance(switch, dict) or not isinstance(switch.get('id'), str) or switch['id'] not in media_ids:
+                            errors.append(f'{prefix}.media.switches references unknown media')
+                            continue
+                        if not isinstance(switch.get('cue'), int) or isinstance(switch['cue'], bool) or switch['cue'] < 0:
+                            errors.append(f'{prefix}.media.switches.cue must be a nonnegative integer')
+                        if not _number(switch.get('offset_ms', 0)) or switch.get('offset_ms', 0) < 0:
+                            errors.append(f'{prefix}.media.switches.offset_ms must be nonnegative')
+                        if switch.get('fit', 'contain') not in ('cover', 'contain'):
+                            errors.append(f'{prefix}.media.switches.fit must be contain or cover')
+        reveals = scene.get('reveal_cues', [])
+        if not isinstance(reveals, list) or any(not isinstance(x, int) or isinstance(x, bool) or x < 0 for x in reveals):
+            errors.append(f'{prefix}.reveal_cues must contain nonnegative sentence cue indices')
     for key, default in [('lead_ms', 150), ('tail_ms', 350)]:
         value = report.get(key, default)
         if not _number(value) or value < 0:

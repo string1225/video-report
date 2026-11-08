@@ -66,6 +66,14 @@ def check_output(output):
     qa['captions'] = {'count': len(captions), 'timing_types': sorted({c['timing'] for c in captions})}
     if (output/'render-qa.json').exists():
         qa['presentation'] = read_json(output/'render-qa.json')
+    encoding = read_json(output/'encoding.json') if (output/'encoding.json').exists() else {}
+    if encoding.get('render_mode') == 'deterministic_frames':
+        if not (output/'motion-qa.json').exists():
+            qa['errors'].append('Current animated video is missing motion QA')
+        else:
+            qa['motion'] = read_json(output/'motion-qa.json')
+            if qa['motion'].get('frames') != encoding.get('frames'):
+                qa['errors'].append('Motion QA frame count does not match the current video')
     if (output/'human-review.json').exists():
         qa['human_review'] = read_json(output/'human-review.json')
     qa['passed'] = not qa['errors']
@@ -137,7 +145,7 @@ def main(argv=None):
         current = 'render'
         from report_render import write_deck, capture_slides
         stage_started = time.monotonic()
-        write_deck(report, output, timeline, captions)
+        write_deck(report, output, timeline, captions, report_dir=report_path.parent)
         print('Rendering editable HTML and checking every slide...', flush=True)
         images, render_qa = capture_slides(report, output)
         stage_seconds['render'] = time.monotonic()-stage_started
