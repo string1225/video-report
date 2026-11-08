@@ -7,7 +7,7 @@
   "fps": 30,
   "font": "Microsoft YaHei",
   "font_size": 46,
-  "max_caption_chars": 22,
+  "max_caption_chars": 36,
   "voice": {
     "name": "zh-CN-XiaoxiaoNeural",
     "rate": "+5%"

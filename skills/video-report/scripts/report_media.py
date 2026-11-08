@@ -305,7 +305,7 @@ def prepare_audio(report: dict, output: Path, report_dir: Path) -> tuple[list, l
         raise ValueError('voice must be an object')
     lead = round(report.get('lead_ms', 150) * SAMPLE_RATE / 1000)
     tail = round(report.get('tail_ms', 350) * SAMPLE_RATE / 1000)
-    max_chars = report.get('max_caption_chars', 22)
+    max_chars = report.get('max_caption_chars', 36)
     timeline, captions, scene_manifests, all_audio = [], [], [], []
     cursor = 0
     for index, scene in enumerate(report['scenes']):

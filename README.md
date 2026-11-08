@@ -31,7 +31,7 @@ Chromium版本由锁定的Playwright包确定，便携下载检查ZIP CRC、解�
 .venv/Scripts/python.exe skills/video-report/scripts/video_report.py check output/format-acceptance
 ```
 
-实测成片：11页，约4分41秒，1920×1080、30fps，中文神经配音，82条使用真实词边界的字幕。文献证据见 [研究核对](docs/research/format-acceptance-evidence.md)，制作与验收记录见 [案例QA](examples/format-acceptance/qa-summary.json)。媒体文件在本地 `output/`，不会随源码提交。
+实测成片：11页，约4分41秒，1920×1080、30fps，中文神经配音。字幕使用真实词边界按完整句子重组为46条，长句在同一条内分两行。文献证据见 [研究核对](docs/research/format-acceptance-evidence.md)，制作与验收记录见 [案例QA](examples/format-acceptance/qa-summary.json)。媒体文件在本地 `output/`，不会随源码提交。
 
 ## 安装为个人 skill
 
@@ -54,6 +54,10 @@ New-Item -ItemType Junction -Path $skillDestination -Target $skillSource
 - `check`：完整解码视频，检查编码、尺寸、帧率、实际帧数、音轨、音量和字幕区间。
 
 输出包括 `video.mp4`、`deck/index.html`、字幕、配音、分镜、来源、封面、联系表、统一时间轴、制作记录与QA。HTML可独立编辑预览；再次 `render/build` 会生成并覆盖它。需要反复导出的视频定制应修改skill的assets模板／样式或报告JSON。
+
+字幕以完整句子为单位，`max_caption_chars`默认36，是每行排版目标；不会按字数或句中停顿把句子切成前后两条。允许第二行，仍须在成片中核对可读性和安全区。
+
+完整构建还输出 `costs.json`，报告实测阶段耗时、缓存与新增合成量。当前没有配置收费配音API；模型／订阅、电力等未提供账单的成本保持未知，不能将总成本一概记为零。案例最新成本见 [成本记录](examples/format-acceptance/costs.json)。
 
 当前采用静态页面与硬切。已有录音可配合内联 `scene.captions` 使用；外部SRT需先转换成这些记录。任意自定义SSML、ASR、Remotion、Azure适配器、PPTX导入、持续动画与自动发布不在已实现功能中。
 

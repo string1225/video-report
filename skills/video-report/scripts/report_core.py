@@ -104,7 +104,7 @@ def make_timeline(durations_ms: list[float], fps=30) -> list[dict]:
     return result
 
 
-def _two_lines(text: str, max_chars: int = 22) -> str:
+def _two_lines(text: str, max_chars: int = 36) -> str:
     text = text.replace('\r', '')
     if text.count('\n') == 1:
         return text
@@ -113,8 +113,14 @@ def _two_lines(text: str, max_chars: int = 22) -> str:
         return text
     # A line break affects layout only; it never fabricates a timing boundary.
     midpoint = len(text) // 2
+    # Prefer an existing clause boundary only when both lines remain balanced.
+    # A length limit controls line layout, never a new timed subtitle cue.
+    limit = max(max_chars, math.ceil(len(text) / 2))
     candidates = [m.end() for m in re.finditer(r'[，。！？；、,.;!? ]', text)
-                  if 0 < m.end() < len(text)]
+                  if 0 < m.end() < len(text) and max(m.end(), len(text)-m.end()) <= limit]
+    if not candidates:
+        candidates = [p for p in range(1, len(text))
+                      if max(p, len(text)-p) <= limit and text[p] not in '，。！？；：、,.!?;:）】》」』”’']
     split = min(candidates, key=lambda p: abs(p - midpoint)) if candidates else midpoint
     return text[:split] + '\n' + text[split:]
 
@@ -125,7 +131,7 @@ def _join_words(left, right):
     return left + right
 
 
-def make_captions(events: list[dict], max_chars=22) -> list[dict]:
+def make_captions(events: list[dict], max_chars=36) -> list[dict]:
     if not isinstance(max_chars, int) or max_chars < 1:
         raise ValueError('max_chars must be positive')
     result = []
@@ -157,14 +163,13 @@ def make_captions(events: list[dict], max_chars=22) -> list[dict]:
                            'timing': 'segment' if timing == 'segment' else 'sentence'})
             continue
         joined = _join_words(pending['text'], text) if pending else text
-        if pending and (len(joined) > max_chars or start - pending['end_ms'] > 650):
-            flush()
-            joined = text
         if pending:
             pending.update(text=joined, end_ms=end)
         else:
             pending = {'start_ms': start, 'end_ms': end, 'text': text, 'timing': 'word'}
-        if re.search(r'[。！？!?；;]$', text):
+        # Semicolons and long pauses may be inside one sentence. Preserve the
+        # whole sentence, including a closing quote, on one (possibly 2-line) cue.
+        if re.search(r'[。！？!?][”’"\'）)\]】」』]*\s*$', text):
             flush()
     flush()
     return result

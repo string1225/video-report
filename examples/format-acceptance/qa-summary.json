@@ -27,7 +27,7 @@
     "manual_listening": "not_performed",
     "manual_visual_review": "not_performed",
     "captions": {
-      "count": 82,
+      "count": 46,
       "timing_types": [
         "word"
       ]
@@ -55,22 +55,19 @@
   },
   "assistant_visual_review": {
     "reviewer": "assistant",
-    "contact_sheet": "contact-sheet.png",
     "video_frames": [
-      "quality/intro-caption.png",
-      "quality/evidence-final.png",
-      "quality/closing-caption.png"
+      "quality/full-sentence-intro.png",
+      "quality/full-sentence-long.png"
     ],
     "observations": [
-      "All eleven slides inspected through the contact sheet.",
-      "Chinese glyphs, source notes and subtitle safe area visible.",
-      "Chart values were widened to remain on one line; final encoded frame inspected."
+      "The longest sentence remains one cue and uses two lines with a comma line break.",
+      "No missing text or sentence split; subtitle lines stay clear of source notes and frame edges."
     ],
     "full_manual_listening": "not_performed"
   },
   "tests": {
     "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
-    "run": 36,
+    "run": 41,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -120,6 +117,44 @@
       "height": 42
     }
   },
-  "video_sha256": "9551e2d4f081aa5eab46b984fd06b5feff3762a18c52e6e7c83954b43e6f0eb4",
-  "delivery": "Generated media are local under output/format-acceptance and excluded from Git; report, research, scripts, and QA are versioned."
+  "video_sha256": "c42fde16f02eafb1e84bb2f70c0f8033fcc5b72a9403f26eb32780281e9b2ff4",
+  "delivery": "Generated media are local under output/format-acceptance and excluded from Git; report, research, scripts, and QA are versioned.",
+  "subtitle_revision_checked_on": "2026-11-08",
+  "subtitle_sentence_review": {
+    "policy": "one complete sentence per cue",
+    "all_scene_sentences_match_narration": true,
+    "previous_cue_count": 82,
+    "cue_count": 46,
+    "two_line_cues": 9,
+    "maximum_line_characters": 36,
+    "maximum_sentence_characters": 67
+  },
+  "costs": {
+    "scope": "This pipeline build only; excludes agent research, software development and initial setup.",
+    "build_elapsed_seconds": 58.36,
+    "stage_elapsed_seconds": {
+      "audio": 0.27,
+      "render": 3.14,
+      "encode": 31.33,
+      "check": 23.39
+    },
+    "audio": {
+      "units": 11,
+      "cache_hits": 11,
+      "new_synthesis_units": 0,
+      "new_synthesis_characters": 0,
+      "providers": [
+        "edge-tts"
+      ],
+      "note": "Units describe completed synthesis jobs, not HTTP requests or failed retries."
+    },
+    "direct_external_service_cost_cny": 0,
+    "direct_service_basis": "No paid API credentials or billable service configured in the implemented edge-tts/external-audio pipeline.",
+    "model_cost_cny": null,
+    "model_usage": "Not exposed to this script; use the actual Codex/API usage or subscription bill.",
+    "local_electricity_and_hardware_cost_cny": null,
+    "total_cost_cny": null,
+    "total_cost_note": "Unknown model billing, local power and equipment cost are not treated as zero.",
+    "output_video_bytes": 11727393
+  }
 }

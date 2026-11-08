@@ -71,9 +71,39 @@ class CoreTests(unittest.TestCase):
         events = [{'start_ms': i * 100, 'end_ms': i * 100 + 80, 'text': t, 'type': 'word'}
                   for i, t in enumerate(['中', '国', '研', '究', '报', '告'])]
         captions = core.make_captions(events, max_chars=4)
-        self.assertEqual([c['text'] for c in captions], ['中国研究', '报告'])
-        self.assertEqual([(c['start_ms'], c['end_ms']) for c in captions], [(0, 380), (400, 580)])
+        self.assertEqual(len(captions), 1)
+        self.assertEqual(captions[0]['text'].replace('\n', ''), '中国研究报告')
+        self.assertEqual([(c['start_ms'], c['end_ms']) for c in captions], [(0, 580)])
         self.assertTrue(all(c['timing'] == 'word' for c in captions))
+
+    def test_complete_sentence_is_not_split_by_character_budget_or_pause(self):
+        first = '先给结论：没有一种载体能对所有人、所有任务稳赢。'
+        second = '关键是区分愿不愿意看、能不能看懂，以及之后能不能用。'
+        text = first + second
+        events = [{'start_ms': i*200+(900 if i>12 else 0),
+                   'end_ms': i*200+(900 if i>12 else 0)+100,
+                   'text': char, 'type': 'word'} for i, char in enumerate(text)]
+        captions = core.make_captions(events, max_chars=22)
+        self.assertEqual([c['text'].replace('\n', '') for c in captions], [first, second])
+        self.assertFalse(any(c['text'] in ('赢。', '不能用。') for c in captions))
+
+    def test_long_sentence_uses_two_balanced_lines_with_original_word_times(self):
+        text = '一项涉及一百一十名工程学生的研究发现，用完整结论句配合视觉证据的幻灯片，比常规默认式设计带来更好的理解、较少误解，以及更强的延迟回忆。'
+        events = [{'start_ms': i*100, 'end_ms': i*100+80,
+                   'text': char, 'type': 'word'} for i, char in enumerate(text)]
+        captions = core.make_captions(events, max_chars=36)
+        self.assertEqual(len(captions), 1)
+        self.assertEqual(captions[0]['text'].replace('\n', ''), text)
+        self.assertEqual(len(captions[0]['text'].splitlines()), 2)
+        self.assertLessEqual(max(map(len, captions[0]['text'].splitlines())), 36)
+        self.assertEqual((captions[0]['start_ms'], captions[0]['end_ms']), (0, (len(text)-1)*100+80))
+
+    def test_sentence_ending_with_closing_quote_is_a_boundary(self):
+        captions = core.make_captions([
+            {'start_ms': 0, 'end_ms': 100, 'text': '他说：', 'type': 'word'},
+            {'start_ms': 100, 'end_ms': 500, 'text': '“先看结论。”', 'type': 'word'},
+            {'start_ms': 500, 'end_ms': 900, 'text': '再看证据。', 'type': 'word'}])
+        self.assertEqual([c['text'] for c in captions], ['他说：“先看结论。”', '再看证据。'])
 
     def test_captions_reject_overlapping_events_even_within_word_group(self):
         for kind in ('word', 'sentence', 'segment'):

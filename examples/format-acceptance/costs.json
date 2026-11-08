@@ -1,0 +1,28 @@
+{
+  "scope": "This pipeline build only; excludes agent research, software development and initial setup.",
+  "build_elapsed_seconds": 58.36,
+  "stage_elapsed_seconds": {
+    "audio": 0.27,
+    "render": 3.14,
+    "encode": 31.33,
+    "check": 23.39
+  },
+  "audio": {
+    "units": 11,
+    "cache_hits": 11,
+    "new_synthesis_units": 0,
+    "new_synthesis_characters": 0,
+    "providers": [
+      "edge-tts"
+    ],
+    "note": "Units describe completed synthesis jobs, not HTTP requests or failed retries."
+  },
+  "direct_external_service_cost_cny": 0,
+  "direct_service_basis": "No paid API credentials or billable service configured in the implemented edge-tts/external-audio pipeline.",
+  "model_cost_cny": null,
+  "model_usage": "Not exposed to this script; use the actual Codex/API usage or subscription bill.",
+  "local_electricity_and_hardware_cost_cny": null,
+  "total_cost_cny": null,
+  "total_cost_note": "Unknown model billing, local power and equipment cost are not treated as zero.",
+  "output_video_bytes": 11727393
+}
