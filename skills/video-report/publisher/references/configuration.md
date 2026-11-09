@@ -34,7 +34,7 @@ node scripts/config.mjs status
    - 抖音默认 topics；
    - B站允许保留的平台自动 tags；
    - YouTube 默认分类、语言和可见性。
-6. 是否每个视频都能真实声明原创。没有明确确认时使用 `ask_each_run`。
+6. 继承用户已经明确给出的自制政策；只在缺少依据时补问。所有输入视频均原创可用 `all_videos_original`；仅授权助手制作的成片时，按 [持续自制授权](originality-policy.md)另存本机偏好，普通输入保留 `ask_each_run`。
 7. 建议检查/上传并发为 `4/4`，默认使用平台封面；用户可以修改。
 
 写入前用简短清单复述全部选择并取得确认。
@@ -112,7 +112,7 @@ node scripts/config.mjs add-platform youtube \
 
 - 当前请求不能静默加入 `availablePlatforms` 之外的平台。
 - `all_videos_original` 只表示长期内容事实，不代表允许最终发布。
-- `ask_each_run` 要求每次 mutation 前获得当前视频确认并添加 `--confirm-original-rights`。
+- `ask_each_run` 要求每次 mutation 运行具备自制依据并添加 `--confirm-original-rights`；适用的助手制作成片长期授权就是既有依据，Agent直接传参，不要求用户逐次确认。`creation-policy.json` 由Agent在交接时读取，CLI不自动读取。
 - 配置可以保存平台可用性、文案偏好、默认 tags、原创政策、并发和封面偏好。
 - 不保存 cookies、token、密码、单次视频路径或最终发布指令。
 - 不手工编辑 schema；使用 CLI 写入，程序负责校验、权限和旧版本迁移。

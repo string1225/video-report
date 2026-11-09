@@ -55,7 +55,7 @@ scripts/run-safe-platforms.sh \
 
 位置参数仍然可用：`scripts/run-safe-platforms.sh package.json task-suffix xiaohongshu douyin`。
 
-When onboarding has `declarations.originalityPolicy: all_videos_original`, the runner applies truthful original/self-made declarations without another flag. With the generic `ask_each_run` policy, add `--confirm-original-rights` only after the user confirms the current video; this one-run override is not persisted. Read-only `--inspect-only` never needs either signal.
+When onboarding has `declarations.originalityPolicy: all_videos_original`, the runner applies original/self-made declarations without another flag. With `ask_each_run`, the agent adds `--confirm-original-rights` from either the current video's confirmation or an applicable standing authorization for assistant-created videos; see [originality policy](originality-policy.md). Do not ask again for an already authorized assistant-created video or its revisions. The CLI does not read the private creation-policy file itself; the flag remains a one-run input. Read-only `--inspect-only` never needs either signal.
 
 The platform list is optional; omit it to use configured `defaultPlatforms`. Explicit platform arguments may select any configured `availablePlatforms`. If the second positional argument is a platform key, the task suffix defaults to `manual`.
 
@@ -173,7 +173,7 @@ node scripts/v2/run-platform.mjs \
 
 `upload_start` 和 `prefill` 支持五个平台。`upload_start` 不是上传完成回执；`prefill` 只处理已实测稳定字段且不上传封面或原创声明，运行后仍必须执行正式 `upload`、`mutate` 和 `verify`。
 
-Direct `mutate` diagnosis for Xiaohongshu, Bilibili, or WeChat Channels requires either onboarded `all_videos_original` or the one-run `--confirm-original-rights` override. `inspect`, `upload`, `verify`, and Bilibili `quarantine` remain available without either signal.
+Direct `mutate` diagnosis for Xiaohongshu, Bilibili, or WeChat Channels requires either onboarded `all_videos_original` or `--confirm-original-rights`, including when the flag is based on applicable standing authorization. `inspect`, `upload`, `verify`, and Bilibili `quarantine` remain available without either signal.
 
 `quarantine` is valid only for Bilibili. Always reuse the numeric task-space id recorded in job state; do not invent a second task space for an active draft.
 
